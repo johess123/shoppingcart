@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} 註冊頁面 {% endblock %}
+{% block content%}
+{% if doagain == False %}
+<script>alert("註冊成功！")</script>
+<script>window.location.href='login'</script>
+{% endif %}
+{% if alert1 == True %}
+<script>alert("該帳號名稱已註冊過！")</script>
+<script>window.location.href='regist'</script>
+{% endif %}
+{% if alert2 == True %}
+<script>alert('類型只可輸入"a"或"u"！')</script>
+<script>window.location.href='regist'</script>
+{% endif %}
+<h2>註冊頁面</h2>
+<form method = "POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{form.as_p}}
+<input type="submit" value="註冊"/> <input type="button" value="登入" onclick="location.href='login'">
+</form>
+{% endblock %}

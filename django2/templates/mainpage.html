@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>首頁</title>
+    </head>
+    {% if alert1 == True %}
+    <script>alert("此商品庫存不足！")</script>
+    <script>window.location.href='mainPage'</script>
+    {% endif %}
+    {% if alert2 == True %}
+    <script>alert("查無此商品")</script>
+    <script>window.location.href='mainPage'</script>
+    {% endif %}
+    {% if doagain == False %}
+    <script>alert("新增成功！")</script>
+    <script>window.location.href='mainPage'</script>
+    {% endif %}
+    <h2>我的購物車</h2>
+    {% for i in mycart %}
+    <p>購物車編號:{{i.id}} 名稱:{{i.name}} 數量:{{i.quality}} 總價格:{{i.price}} 是否結帳:{{i.paid}}</p><br>
+    {% endfor %}
+    <form method = "POST">
+        {% csrf_token %}
+        {{form.as_p}}
+    <input type="submit" value="加入購物車"/>
+    <input type="button" value="刪除購物車" onclick="location.href='delCart'">
+    <input type="button" value="購物車結帳" onclick="location.href='pay'">
+    </form>
+    <h2>所有商品</h2>
+    {% for i in all_goods %}
+    <p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}} 賣家:{{i.uid}}</p><br>
+    {% endfor %}
+    <input type="button" value="登出" onclick="location.href='logout'">
+</html>

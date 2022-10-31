@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}新增商品{% endblock %}
+{% block content%}
+{% if doagain == False %}
+    <script>alert("新增商品成功！")</script>
+    <script>window.location.href='addGoods'</script>
+{% endif %}
+<h2>新增商品</h2>
+<form method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="新增"/> <input type="button" value="回上頁" onclick="location.href='listMyGoods'">
+</form>
+{% endblock %}

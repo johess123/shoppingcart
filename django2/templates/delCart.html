@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}刪除購物車商品{% endblock %}
+{% block content%}
+{% if doagain == False %}
+    <script>alert("刪除購物車成功！")</script>
+    <script>window.location.href='mainPage'</script>
+{% endif %}
+{% if alert1 == False %}
+    <script>alert("查無購物車！")</script>
+    <script>window.location.href='delCart'</script>
+{% endif %}
+<h2>刪除購物車商品</h2>
+<form method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="刪除"/> <input type="button" value="回上頁" onclick="location.href='mainPage'">
+</form>
+<h2>我的購物車</h2>
+{% for i in mycart %}
+<p>購物車編號:{{i.id}} 名稱:{{i.name}} 數量:{{i.quality}} 總價格:{{i.price}} 是否結帳:{{i.paid}}</p><br>
+{% endfor %}
+{% endblock %}

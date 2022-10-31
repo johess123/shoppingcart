@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}刪除商品{% endblock %}
+{% block content%}
+{% if doagain == False %}
+    <script>alert("刪除商品成功！")</script>
+    <script>window.location.href='listMyGoods'</script>
+{% endif %}
+{% if alert1 == False %}
+    <script>alert("查無此商品！")</script>
+    <script>window.location.href='delGoods'</script>
+{% endif %}
+<h2>刪除商品</h2>
+<form method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="刪除"/> <input type="button" value="回上頁" onclick="location.href='listMyGoods'">
+</form>
+<h2>我的商品</h2>
+{% for i in mygoods %}
+<p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}}</p><br>
+{% endfor %}
+{% endblock %}

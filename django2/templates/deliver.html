@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}出貨{% endblock %}
+{% block content%}
+{% if doagain == False %}
+    <script>alert("出貨成功！")</script>
+    <script>window.location.href='listMyGoods'</script>
+{% endif %}
+{% if alert1 == False %}
+    <script>alert("查無訂單！")</script>
+    <script>window.location.href='deliver'</script>
+{% endif %}
+{% if alert2 == False %}
+    <script>alert("你的庫存不足！")</script>
+    <script>window.location.href='deliver'</script>
+{% endif %}
+<h2>出貨</h2>
+<form method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="出貨"/> <input type="button" value="回上頁" onclick="location.href='listMyGoods'">
+</form>
+<h2>我的訂單</h2>
+{% for i in mydeliver %}
+<p>訂單編號:{{i.0}} 商品名稱:{{i.1}} 商品總價:{{i.2}} 商品總量:{{i.3}} 買家:{{i.4}}</p><br>
+{% endfor %}
+{% endblock %}

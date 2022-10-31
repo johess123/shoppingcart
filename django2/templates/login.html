@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}登入{% endblock %}
+{% block content%}
+{% if alert1 == True %}
+    <script>alert("該帳號未註冊過！")</script>
+    <script>window.location.href='login'</script>
+{% endif %}
+{% if alert2 == True %}
+    <script>alert("密碼錯誤！")</script>
+    <script>window.location.href='login'</script>
+{% endif %}
+{% if doagain1 == False %}
+    <script>alert("登入成功！")</script>
+    <script>window.location.href='mainPage'</script>
+{% endif %}
+{% if doagain2 == False %}
+    <script>alert("登入成功！")</script>
+    <script>window.location.href='listMyGoods'</script>
+{% endif %}
+<h2>登入頁面</h2>
+<form method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="登入"/> <input type="button" value="註冊" onclick="location.href='regist'">
+</form>
+{% endblock %}
