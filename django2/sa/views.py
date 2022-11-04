@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from .models import allgoods, alluser, allcart, alldeliver
-from .forms import registForm, loginForm, addGoodsForm, updateGoodsForm, delGoodsForm, addCartForm, delCartForm, payForm, deliverForm
+from .models import allgoods, alluser, allcart, alldeliver, goodgood
+from .forms import registForm, loginForm, addGoodsForm, updateGoodsForm, delGoodsForm, addCartForm, delCartForm, payForm, deliverForm, goodForm
 # Create your views here.
 def regist(request):
     form = registForm(request.POST, request.FILES or None)
@@ -303,6 +303,55 @@ def deliver(request):
         'form': form
     }
     return render(request, 'deliver.html', context)
+
+def addgood(request):
+    form = goodForm(request.POST or None)
+    if form.is_valid():
+        user = request.session.get('user')
+        id = request.POST.get('id')
+        thegood = allgoods.objects.filter(id=id) # 檢查有沒有該商品
+        if len(thegood) == 0 or thegood[0].quality == 0:
+            context = {
+                'alert1':False,
+            }
+            return render(request, 'addgood.html',context)
+        else: # 檢查有沒有按過讚
+            hasgood = goodgood.objects.filter(uid=user, gid=id)
+            if len(hasgood) != 0: # 已經按過
+                context = {
+                    'alert2':False,
+                }
+                return render(request, 'addgood.html',context)
+            else:
+                mygood = goodgood(uid = user, gid = id, did = 1)
+                mygood.save()
+                goodnum = allgoods.objects.filter(id=id)[0].goodnum
+                allgoods.objects.filter(id=id).update(goodnum=goodnum+1)
+                context = {
+                    'doagain':False,
+                }
+                return render(request, 'addgood.html',context)
+
+        # 登入成功
+        request.session["user"] = user
+        if kind == "u":
+            context = {
+                'form': form,
+                'doagain1': False,
+            }
+        elif kind == "a":
+            context = {
+                'form': form,
+                'doagain2': False,
+            }
+        form = loginForm()
+        return render(request, 'addgood.html', context)
+    all_goods = allgoods.objects.all()
+    context = {
+        'form':form,
+        'all_goods':all_goods,
+    }
+    return render(request, 'addgood.html', context)
 
 def logout(request):
     del request.session["user"]

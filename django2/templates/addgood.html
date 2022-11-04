@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}商品按讚{% endblock %}
+{% block content%}
+{% if alert1 == False %}
+    <script>alert("查無此商品！")</script>
+    <script>window.location.href='addgood'</script>
+{% endif %}
+{% if alert2 == False %}
+    <script>alert("您已按讚過此商品！")</script>
+    <script>window.location.href='addgood'</script>
+{% endif %}
+{% if doagain == False %}
+    <script>alert("按讚成功！")</script>
+    <script>window.location.href='addgood'</script>
+{% endif %}
+<h2>商品按讚</h2>
+<form method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="按讚"/> <input type="button" value="回首頁" onclick="location.href='mainPage'">
+<h2>所有商品</h2>
+    {% for i in all_goods %}
+    {% if i.quality > 0 %}
+    <p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}} 賣家:{{i.uid}} 按讚數:{{i.goodnum}}</p><br>
+    {% endif %}
+    {% endfor %}
+</form>
+{% endblock %}

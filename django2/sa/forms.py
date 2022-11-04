@@ -53,3 +53,6 @@ class payForm(forms.Form):
 
 class deliverForm(forms.Form):
     id = forms.DecimalField(label='出貨編號')
+
+class goodForm(forms.Form):
+    id = forms.DecimalField(label='商品編號')

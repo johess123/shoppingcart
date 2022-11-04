@@ -28,7 +28,7 @@ urlpatterns = [
     path('delCart', views.delCart, name="delCart"),
     path('pay', views.pay, name="pay"),
     path('deliver', views.deliver, name="deliver"),
-
+    path('addgood', views.addgood, name="addgood"),
     path('logout', views.logout, name="logout"),
 
 ]

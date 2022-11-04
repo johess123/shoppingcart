@@ -25,11 +25,12 @@
     <input type="submit" value="加入購物車"/>
     <input type="button" value="刪除購物車" onclick="location.href='delCart'">
     <input type="button" value="購物車結帳" onclick="location.href='pay'">
+    <input type="button" value="商品按讚" onclick="location.href='addgood'">
     </form>
     <h2>所有商品</h2>
     {% for i in all_goods %}
     {% if i.quality > 0 %}
-    <p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}} 賣家:{{i.uid}}</p><br>
+    <p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}} 賣家:{{i.uid}} 按讚數:{{i.goodnum}}</p><br>
     {% endif %}
     {% endfor %}
     <input type="button" value="登出" onclick="location.href='logout'">

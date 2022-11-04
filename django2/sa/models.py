@@ -7,6 +7,7 @@ class allgoods(models.Model):
     price = models.DecimalField(max_digits = 10, decimal_places=0, default=0) # 價錢
     quality = models.DecimalField(max_digits = 10, decimal_places=0, default=0) # 庫存
     uid = models.CharField(max_length = 10) # 商品的所有人
+    goodnum = models.DecimalField(max_digits = 10, decimal_places=0, default=0) # 按讚數
 
 class alluser(models.Model):
     id = models.AutoField(primary_key = True) # 編號
@@ -27,3 +28,9 @@ class alldeliver(models.Model):
     id = models.AutoField(primary_key = True) # 出貨編號
     uid = models.CharField(max_length = 10) # 帳號
     cid = models.CharField(max_length = 10) # 購物車編號
+
+class goodgood(models.Model):
+    id = models.AutoField(primary_key = True) # 按讚編號
+    uid = models.CharField(max_length = 10) # 帳號
+    gid = models.DecimalField(max_digits = 10, decimal_places=0, default=0) # 商品編號
+    did = models.DecimalField(max_digits=1, decimal_places=0, default=0) # 按讚了沒

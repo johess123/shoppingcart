@@ -3,7 +3,7 @@
 {% block content%}
 <h2>我的商品</h2>
 {% for i in mygoods %}
-<p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}}</p><br>
+<p>商品編號:{{i.id}} 名稱:{{i.name}} 價格:{{i.price}} 庫存:{{i.quality}} 按讚數:{{i.goodnum}}</p><br>
 {% endfor %}
 <input type="button" value="新增商品" onclick="location.href='addGoods'">
 <input type="button" value="修改商品" onclick="location.href='updateGoods'">
